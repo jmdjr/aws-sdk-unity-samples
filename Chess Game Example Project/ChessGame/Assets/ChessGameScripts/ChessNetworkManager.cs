@@ -17,14 +17,15 @@ using System.Text;
 using System.Collections.Generic;
 using System.Threading;
 using System;
+using UnityEngine.SceneManagement;
 
 namespace AWSSDK.Examples.ChessGame
 {
     public class ChessNetworkManager : MonoBehaviour
     {
         # region Constants and configuration values
-        private const string CognitoIdentityPoolId = "";
-        private const string MobileAnaylticsAppId = "";
+        private const string CognitoIdentityPoolId = "us-west-2:286c1653-ef9d-4210-b793-1f102d3c19b5";
+        private const string MobileAnaylticsAppId = "b8de5a8b8d0040f9b8178b1fffff61f4";
 
         // Needed only when building for Android
         private const string AndroidPlatformApplicationArn = "";
@@ -164,9 +165,11 @@ namespace AWSSDK.Examples.ChessGame
         public static ChessNetworkManager Instance { get; private set; }
         void Awake()
         {
+            //AWSConfigs.HttpClient = AWSConfigs.HttpClientOption.UnityWWW;
             Instance = this;
             // This ChessNetworkManager object will persist until the game is closed
             DontDestroyOnLoad(gameObject);
+
             // Initialize AWS SDK
             UnityInitializer.AttachToGameObject(gameObject);
             // Keep track of this users SNS Endpoing in DynamoDB
@@ -174,7 +177,7 @@ namespace AWSSDK.Examples.ChessGame
             // Initialize AnalyticsManager so that we get the side effect of it firing at start event.
             _analyticsManager = AnalyticsManager;
             // Now that the network manager is ready, head to the menu
-            Application.LoadLevel("MainMenu");
+            SceneManager.LoadScene("MainMenu");
         }
         # endregion
 

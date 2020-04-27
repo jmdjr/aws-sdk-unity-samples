@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using Amazon;
 
 namespace AWSSDK.Examples.ChessGame
 {
